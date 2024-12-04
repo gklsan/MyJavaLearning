@@ -14,10 +14,16 @@ public class FirstJavaController {
 
   private FootballCoach myCoach;
 
-  @Autowired
-  public FirstJavaController(FootballCoach theCoach) {
-    myCoach = theCoach;
-  }
+//  @Autowired
+//  public FirstJavaController(FootballCoach theCoach) {
+//    myCoach = theCoach;
+//  }
+// Replace the above code with setter injection. method name may be anything
+    @Autowired
+    public void setFootballCoach(FootballCoach theCoach) {
+        myCoach = theCoach;
+    }
+
 
   @GetMapping("/myname")
   public String getServerName() {

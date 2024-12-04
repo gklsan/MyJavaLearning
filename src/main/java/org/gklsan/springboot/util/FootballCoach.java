@@ -7,7 +7,7 @@ public class FootballCoach implements Coach {
 
   @Override
   public String getCoachName() {
-      return "Football Coach 1";
+      return "Football Coach :=) -";
   }
 
 }
