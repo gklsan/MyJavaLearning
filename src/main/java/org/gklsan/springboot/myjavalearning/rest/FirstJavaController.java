@@ -1,6 +1,6 @@
 package org.gklsan.springboot.myjavalearning.rest;
 
-import org.gklsan.springboot.myjavalearning.common.FootballCoach;
+import org.gklsan.springboot.util.FootballCoach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

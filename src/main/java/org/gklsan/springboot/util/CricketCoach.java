@@ -1,4 +1,4 @@
-package org.gklsan.springboot.myjavalearning.common;
+package org.gklsan.springboot.util;
 
 import org.springframework.stereotype.Component;
 
