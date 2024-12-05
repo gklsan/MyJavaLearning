@@ -16,7 +16,7 @@ public class FirstJavaController {
   private Coach myCoach;
 
   @Autowired
-  public FirstJavaController(@Qualifier("footballCoach") Coach theCoach) {
+  public FirstJavaController(@Qualifier("custom-bean-id") Coach theCoach) {
     System.out.println("In constructor: " + getClass().getSimpleName());
     myCoach = theCoach;
   }
