@@ -14,14 +14,11 @@ public class FirstJavaController {
   private String myName;
 
   private Coach myCoach;
-  private Coach myAnotherCoach;
 
   @Autowired
-  public FirstJavaController(
-          @Qualifier("footballCoach") Coach theCoach,
-          @Qualifier("footballCoach") Coach theAnotherCoach) {
+  public FirstJavaController(@Qualifier("footballCoach") Coach theCoach) {
+    System.out.println("In constructor: " + getClass().getSimpleName());
     myCoach = theCoach;
-    myAnotherCoach = theAnotherCoach;
   }
 
   @GetMapping("/myname")
@@ -29,15 +26,9 @@ public class FirstJavaController {
     return myName;
   }
 
-  @GetMapping("/get-coach-name")
+    @GetMapping("/get-coach-name")
   public String getCoachName() {
       return myCoach.getCoachName();
-  }
-
-  @GetMapping("/check-bean")
-  public String checkBean() {
-    System.out.println("Current controller: " + getClass().getSimpleName());
-    return "Is coach same: " + (myCoach == myAnotherCoach);
   }
 
 }
