@@ -19,11 +19,6 @@ public class FirstJavaController {
   public FirstJavaController(@Qualifier("footballCoach") Coach theCoach) {
     myCoach = theCoach;
   }
-// Replace the above code with setter injection. method name may be anything
-//  @Autowired
-//  public void setFootballCoach(FootballCoach theCoach) {
-//      myCoach = theCoach;
-//  }
 
   @GetMapping("/myname")
   public String getServerName() {
