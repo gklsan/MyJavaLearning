@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication(
         scanBasePackages = {
                 "org.gklsan.springboot.crud",
@@ -25,10 +27,33 @@ public class MyJavaLearningApplication {
   public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
     return runner -> {
       System.out.println("Hello World");
-//      createStudent(studentDAO);
-//      createMultipleStudents(studentDAO);
-      findStudent(studentDAO);
+      createStudent(studentDAO);
+      createMultipleStudents(studentDAO);
+//      findStudent(studentDAO);
+//      updateStudent(studentDAO);
+//      removeStudent(studentDAO);
+//      deleteAllStudents(studentDAO);
     };
+  }
+
+  private void deleteAllStudents(StudentDAO studentDAO) {
+    System.out.println("Deleting all students...");
+    int deletedCount = studentDAO.deleteAll();
+    System.out.println("Deleted " + deletedCount + " students");
+
+  }
+
+  private void removeStudent(StudentDAO studentDAO) {
+    System.out.println("Removing student...");
+    studentDAO.deleteById(4);
+  }
+
+  private void updateStudent(StudentDAO studentDAO) {
+    System.out.println("Updating student...");
+    Student student = studentDAO.findById(1);
+    student.setFirstName("Updated First Name");
+    student.setLastName("Updated Last Name");
+    studentDAO.update(student);
   }
 
   private void findStudent(StudentDAO studentDAO) {
@@ -36,6 +61,18 @@ public class MyJavaLearningApplication {
     Student foundStudent = studentDAO.findById(1);
 
     System.out.println("Found student: " + foundStudent);
+
+    System.out.println("Finding all students...");
+    List<Student> studentList = studentDAO.findAll();
+    for (Student student : studentList) {
+      System.out.println("Student: " + student);
+    }
+
+    System.out.println("Finding student by last name...");
+    List<Student> foundStudentByLastName = studentDAO.queryByLastName("doe");
+    for (Student student : foundStudentByLastName) {
+      System.out.println("Student: " + student);
+    }
   }
 
   private void createMultipleStudents(StudentDAO studentDAO) {
