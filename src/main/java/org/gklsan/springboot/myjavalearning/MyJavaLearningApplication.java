@@ -25,9 +25,17 @@ public class MyJavaLearningApplication {
   public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
     return runner -> {
       System.out.println("Hello World");
-      createStudent(studentDAO);
-      createMultipleStudents(studentDAO);
+//      createStudent(studentDAO);
+//      createMultipleStudents(studentDAO);
+      findStudent(studentDAO);
     };
+  }
+
+  private void findStudent(StudentDAO studentDAO) {
+    System.out.println("Finding student by id...");
+    Student foundStudent = studentDAO.findById(1);
+
+    System.out.println("Found student: " + foundStudent);
   }
 
   private void createMultipleStudents(StudentDAO studentDAO) {
@@ -51,6 +59,12 @@ public class MyJavaLearningApplication {
     studentDAO.save(tmpStudent);
 
     System.out.println("Saved student: " + tmpStudent.getId());
+
+    System.out.println("Finding student by id...");
+    Student foundStudent = studentDAO.findById(tmpStudent.getId());
+
+    System.out.println("Found student: " + foundStudent);
+
   }
 
 }
