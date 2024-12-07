@@ -5,7 +5,7 @@ import org.gklsan.springboot.myjavalearning.entity.Student;
 import java.util.List;
 
 public interface StudentDAO {
-  void save(Student theStudent);
+  Student save(Student theStudent);
 
   Student findById(int id);
 

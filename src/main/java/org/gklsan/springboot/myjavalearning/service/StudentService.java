@@ -10,7 +10,7 @@ public interface StudentService {
 
   List<Student> findAll();
 
-  void save(Student theStudent);
+  Student save(Student theStudent);
 
   void deleteById(int id);
 }

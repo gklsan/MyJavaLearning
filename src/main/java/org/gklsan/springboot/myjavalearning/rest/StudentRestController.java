@@ -37,4 +37,15 @@ public class StudentRestController {
 
     return studentService.findById(student_id);
   }
+
+  @PostMapping("/students")
+  public Student addStudent(@RequestBody Student theStudent) {
+    theStudent.setId(0);
+    return studentService.save(theStudent);
+  }
+
+  @PutMapping("/students")
+  public Student updateStudent(@RequestBody Student theStudent) {
+    return studentService.save(theStudent);
+  }
 }
