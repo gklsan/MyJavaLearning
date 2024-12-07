@@ -1,41 +1,48 @@
 package org.gklsan.springboot.myjavalearning.service;
 
 import jakarta.transaction.Transactional;
-import org.gklsan.springboot.myjavalearning.dao.StudentDAO;
 import org.gklsan.springboot.myjavalearning.entity.Student;
+import org.gklsan.springboot.myjavalearning.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-  private final StudentDAO studentDAO;
+  private StudentRepository studentRepository;
 
   @Autowired
-  public StudentServiceImpl(StudentDAO theStudentDAO) {
-    studentDAO = theStudentDAO;
+  public StudentServiceImpl(StudentRepository theStudentRepository) {
+    studentRepository = theStudentRepository;
+  }
+
+  @Override
+  public Student findById(int studentId) {
+    Optional<Student> theStudent = studentRepository.findById(studentId);
+    Student theStudent1 = null;
+    if(theStudent.isPresent()) {
+      theStudent1 = theStudent.get();
+    } else {
+      throw new RuntimeException("Did not find student id - " + studentId);
+    }
+    return theStudent1;
   }
 
   @Override
   public List<Student> findAll() {
-    return studentDAO.findAll();
+    return studentRepository.findAll();
   }
 
   @Override
   @Transactional
   public Student save(Student theStudent) {
-    return studentDAO.save(theStudent);
+    return studentRepository.save(theStudent);
   }
 
-  @Override
   @Transactional
   public void deleteById(int id) {
-    studentDAO.deleteById(id);
-  }
-
-  @Override
-  public Student findById(int studentId) {
-    return studentDAO.findById(studentId);
+    studentRepository.deleteById(id);
   }
 }
