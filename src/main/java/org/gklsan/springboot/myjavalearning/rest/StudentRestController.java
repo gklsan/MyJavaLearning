@@ -48,4 +48,14 @@ public class StudentRestController {
   public Student updateStudent(@RequestBody Student theStudent) {
     return studentService.save(theStudent);
   }
+
+  @DeleteMapping("/students/{student_id}")
+  public String deleteStudent(@PathVariable int student_id) {
+    if (student_id < 1) {
+      throw new StudentNotFoundException("Student id not found - " + student_id);
+    }
+
+    studentService.deleteById(student_id);
+    return "Deleted student id - " + student_id;
+  }
 }
