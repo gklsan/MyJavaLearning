@@ -5,7 +5,6 @@ import jakarta.persistence.TypedQuery;
 import org.gklsan.springboot.myjavalearning.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +19,6 @@ public class StudentDAOImpl implements StudentDAO {
   }
 
   @Override
-  @Transactional
   public void save(Student theStudent) {
     entityManager.persist(theStudent);
   }
@@ -44,20 +42,17 @@ public class StudentDAOImpl implements StudentDAO {
   }
 
   @Override
-  @Transactional
   public void update(Student theStudent) {
     entityManager.merge(theStudent);
   }
 
   @Override
-  @Transactional
   public void deleteById(int id) {
     Student student = entityManager.find(Student.class, id);
     entityManager.remove(student);
   }
 
   @Override
-  @Transactional
   public int deleteAll() {
     return entityManager.createQuery("delete from Student").executeUpdate();
   }

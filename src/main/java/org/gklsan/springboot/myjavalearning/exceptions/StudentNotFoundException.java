@@ -1,4 +1,4 @@
-package org.gklsan.springboot.myjavalearning.rest;
+package org.gklsan.springboot.myjavalearning.exceptions;
 
 public class StudentNotFoundException extends RuntimeException {
   public StudentNotFoundException(String message) {

@@ -1,10 +1,9 @@
 package org.gklsan.springboot.myjavalearning.rest;
 
-import org.gklsan.springboot.myjavalearning.dao.StudentDAO;
 import org.gklsan.springboot.myjavalearning.entity.Student;
+import org.gklsan.springboot.myjavalearning.exceptions.StudentNotFoundException;
+import org.gklsan.springboot.myjavalearning.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +12,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentRestController {
 
-  private final StudentDAO studentDAO;
+  private final StudentService studentService;
 
   @Autowired
-  public StudentRestController(StudentDAO studentDAO) {
-      this.studentDAO = studentDAO;
+  public StudentRestController(StudentService theStudentService) {
+      studentService = theStudentService;
   }
 
   @GetMapping("/hello")
@@ -27,7 +26,7 @@ public class StudentRestController {
 
   @GetMapping("/students")
   public List<Student> getStudents() {
-      return studentDAO.findAll();
+      return studentService.findAll();
   }
 
   @GetMapping("/students/{student_id}")
@@ -36,25 +35,6 @@ public class StudentRestController {
       throw new StudentNotFoundException("Student id not found - " + student_id);
     }
 
-    return studentDAO.findById(student_id);
-  }
-
-  @ExceptionHandler
-  public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
-    StudentErrorResponse error = new StudentErrorResponse();
-    error.setStatus(HttpStatus.NOT_FOUND.value());
-    error.setMessage(exc.getMessage());
-    error.setTimeStamp(System.currentTimeMillis());
-    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-  }
-
-
-  @ExceptionHandler
-  public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
-    StudentErrorResponse error = new StudentErrorResponse();
-    error.setStatus(HttpStatus.BAD_REQUEST.value());
-    error.setMessage(exc.getMessage());
-    error.setTimeStamp(System.currentTimeMillis());
-    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    return studentService.findById(student_id);
   }
 }
