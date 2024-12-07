@@ -9,14 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
-@SpringBootApplication(
-        scanBasePackages = {
-                "org.gklsan.springboot.crud",
-                "org.gklsan.springboot.myjavalearning"
-        }
-)
-
-//@SpringBootApplication
+@SpringBootApplication
 public class MyJavaLearningApplication {
 
   public static void main(String[] args) {
@@ -27,8 +20,8 @@ public class MyJavaLearningApplication {
   public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
     return runner -> {
       System.out.println("Hello World");
-      createStudent(studentDAO);
-      createMultipleStudents(studentDAO);
+//      createStudent(studentDAO);
+//      createMultipleStudents(studentDAO);
 //      findStudent(studentDAO);
 //      updateStudent(studentDAO);
 //      removeStudent(studentDAO);
