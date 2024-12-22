@@ -65,6 +65,10 @@ public class Student {
     this.email = email;
   }
 
+  public String getFullName() {
+    return this.firstName + " " + this.lastName;
+  }
+
   @Override
   public String toString() {
     return "Student{" +
