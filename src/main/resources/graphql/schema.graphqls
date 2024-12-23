@@ -4,11 +4,19 @@ type Query {
 }
 
 type Mutation {
-    createStudent(student: StudentInput): Student
+    createStudent(student: StudentInputCreate): Student
     deleteStudent(id: ID!): Boolean
+    updateStudent(student: StudentInputUpdate): Student
 }
 
-input StudentInput {
+input StudentInputCreate {
+    firstName: String!
+    lastName: String!
+    email: String!
+}
+
+input StudentInputUpdate {
+    id: ID!
     firstName: String!
     lastName: String!
     email: String!

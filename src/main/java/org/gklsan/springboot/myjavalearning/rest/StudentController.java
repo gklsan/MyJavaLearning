@@ -42,13 +42,22 @@ public class StudentController extends StudentNotFoundException {
     return studentRepository.save(student);
   }
 
-  record StudentInput(String firstName, String lastName, String email) {}
+  record StudentInput(Integer id, String firstName, String lastName, String email) {}
 
   @MutationMapping
   Boolean deleteStudent(@Argument Integer id) {
     studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student not found with id: " + id));
     studentRepository.deleteById(id);
     return true;
+  }
+
+  @MutationMapping
+  Student updateStudent(@Argument("student") StudentInput studentInput) {
+    Student student = studentRepository.findById(studentInput.id()).orElseThrow(() -> new StudentNotFoundException("Student not found with id: " + studentInput.id()));
+    student.setFirstName(studentInput.firstName());
+    student.setLastName(studentInput.lastName());
+    student.setEmail(studentInput.email());
+    return studentRepository.save(student);
   }
 
 }
