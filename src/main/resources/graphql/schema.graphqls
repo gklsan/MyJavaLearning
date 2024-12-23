@@ -1,23 +1,58 @@
-type Query {
-    students: [Student]
-    studentById(id: ID!): Student
-}
-
-type Mutation {
-    createStudent(student: StudentInput): Student
-    deleteStudent(id: ID!): Boolean
-}
-
-input StudentInput {
-    firstName: String!
-    lastName: String!
-    email: String!
-}
-
 type Student {
     id: ID!
     firstName: String!
     lastName: String!
     email: String!
     fullName: String!
+    department: Department
+}
+
+input StudentInputCreate {
+    firstName: String!
+    lastName: String!
+    email: String!
+    departmentId: ID!
+}
+
+input StudentInputUpdate {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+}
+
+type Department {
+    id: ID!
+    name: String!
+    staffCount: Int!
+    students: [Student]
+}
+
+input DepartmentCreate {
+    name: String!
+    staffCount: Int!
+}
+
+input DepartmentUpdate {
+    id: ID!
+    name: String!
+    staffCount: Int!
+}
+
+type Query {
+    students: [Student]
+    studentById(id: ID!): Student
+
+    departments: [Department]
+    departmentById(id: ID!): Department
+}
+
+type Mutation {
+    createStudent(student: StudentInputCreate): Student
+    deleteStudent(id: ID!): Boolean
+    updateStudent(student: StudentInputUpdate): Student
+
+    createDepartment(department: DepartmentCreate!): Department
+    deleteDepartment(id: ID!): Boolean
+    updateDepartment(department: DepartmentUpdate!): Department
 }

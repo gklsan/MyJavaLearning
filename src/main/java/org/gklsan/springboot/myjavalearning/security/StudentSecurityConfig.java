@@ -6,15 +6,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
-import java.net.http.HttpRequest;
 
 @Configuration
 public class StudentSecurityConfig {
@@ -46,6 +42,8 @@ public class StudentSecurityConfig {
                                        .requestMatchers(HttpMethod.GET, "/api/stream").permitAll()
                                        .requestMatchers(HttpMethod.GET, "/api/download").permitAll()
                                        .requestMatchers(HttpMethod.GET, "/api/downloadold").permitAll()
+                                       .requestMatchers(HttpMethod.GET, "/api/graphql", "/graphiql").permitAll() // Allow GET for both paths
+                                       .requestMatchers(HttpMethod.POST, "/api/graphql").permitAll()
 
     );
     http.httpBasic(Customizer.withDefaults());
